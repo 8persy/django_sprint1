@@ -53,9 +53,13 @@ def index(request):
 
 def post_detail(request, pk):
     template = 'blog/detail.html'
-    context = {'data': posts[pk]}
-    if not context['data']:
-        print('FAAAAIL')
+    post = posts[pk].copy()
+    text = post['text']
+    new_text = text.splitlines()
+    post['text'] = new_text
+
+    context = {'data': post}
+
     return render(request, template, context)
 
 

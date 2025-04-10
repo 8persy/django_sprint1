@@ -1,30 +1,29 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {#TODO: make title correct #}
-    Остров отчаянья. 25 октября 1659 года
+    {{ data.location }}. {{ data.date }}
 {% endblock %}
 
 {% block content %}
     <article>
         <ul>
             <li>
-                Место: Остров отчаянья
+                Место: {{ data.location }}
             </li>
             <li>
-                Дата: 25 октября 1659 года
+                Дата: {{ data.date }}
             </li>
             <li>
-                Категория: <a href="not-my-day">not-my-day</a>
+                Категория: <a href="{% url 'blog:category_posts' data.category %}">{{ data.category }}</a>
             </li>
         </ul>
         <p>
-            Всю ночь и весь день шел дождь и дул сильный <br>
-            порывистый ветер. 25 октября. Корабль за ночь разбило <br>
-            в щепки; на том месте, где он стоял, торчат какие-то <br>
-            жалкие обломки, да и те видны только во время отлива. <br>
-            Весь этот день я хлопотал около вещей: укрывал и <br>
-            укутывал их, чтобы не испортились от дождя.
+            {% for line in data.text %}
+                {{ line }}
+                {% if not forloop.last %}
+                    <br>
+                {% endif %}
+            {% endfor %}
         </p>
     </article>
 {% endblock %}
