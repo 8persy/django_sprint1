@@ -1,29 +1,24 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ data.location }}. {{ data.date }}
+    {{ post.location }}. {{ post.date }}
 {% endblock %}
 
 {% block content %}
     <article>
         <ul>
             <li>
-                Место: {{ data.location }}
+                Место: {{ post.location }}
             </li>
             <li>
-                Дата: {{ data.date }}
+                Дата: {{ post.date }}
             </li>
             <li>
-                Категория: <a href="{% url 'blog:category_posts' data.category %}">{{ data.category }}</a>
+                Категория: <a href="{% url 'blog:category_posts' post.category %}">{{ post.category }}</a>
             </li>
         </ul>
         <p>
-            {% for line in data.text %}
-                {{ line }}
-                {% if not forloop.last %}
-                    <br>
-                {% endif %}
-            {% endfor %}
+            {{ post.text }}
         </p>
     </article>
 {% endblock %}
